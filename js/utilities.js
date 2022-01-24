@@ -14,5 +14,5 @@ export function GetBookmarkImageLink(obj) {
 
 export function HasParentClass(child, classname) {
     if (child.className.split(' ').indexOf(classname) >= 0) return true;
-    return child.parentElement && hasParentClass(child.parentElement, classname);
+    return child.parentElement && HasParentClass(child.parentElement, classname);
 }
