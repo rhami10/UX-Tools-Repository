@@ -1,0 +1,23 @@
+{
+  "name": "UX-Tools-Repository",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hami159/Tools-Repository.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hami159/Tools-Repository/issues"
+  },
+  "homepage": "https://github.com/hami159/Tools-Repository",
+  "devDependencies": {
+    "sass": "^1.49.0"
+  }
+}

@@ -1,0 +1,309 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background: #f7f7fe;
+  font-family: "Raleway", serif;
+  color: #333a45;
+}
+
+.wrapper {
+  margin: 5em auto;
+  max-width: 1000px;
+  border-radius: 6px;
+  background-color: #f2f2fd;
+  -webkit-box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.09);
+          box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.09);
+}
+
+.header {
+  padding: 50px 30px 30px 30px;
+  text-align: center;
+}
+
+.header__title {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 2.5em;
+  font-weight: 800;
+  font-family: "Montserrat", serif;
+  line-height: 1.1;
+}
+
+.cards {
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.card {
+  margin: 15px;
+  margin-bottom: 25px;
+  width: calc((100% / 3) - 30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 991px) {
+  .card {
+    width: calc((100% / 2) - 30px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card {
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.card:hover .card__inner {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.card:hover .card__inner .circle {
+  background-color: #314b71;
+}
+
+.card:hover .card__inner svg {
+  color: #f7f7fe;
+}
+
+.card:hover .card__inner__text {
+  background: #314b71;
+  color: #f7f7fe;
+}
+
+.card__inner {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.card__inner:after {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.card__inner__text {
+  border-radius: 6px;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #f7f7fe;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05), 0px 0px 80px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05), 0px 0px 80px rgba(0, 0, 0, 0.1);
+  color: #333a45;
+}
+
+.card__inner__iconcircle {
+  margin-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.card__inner .circle {
+  z-index: 100;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  background-color: #f7f7fe;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: -29px;
+}
+
+.card__inner svg {
+  z-index: 200;
+  position: absolute;
+  font-size: 2.5em;
+  color: #77859a;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: -18px;
+}
+
+.card__expander {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background-color: #333a45;
+  width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  text-transform: uppercase;
+  color: #f7f7fe;
+  font-size: 1.5em;
+}
+
+.card__expander .bookmark {
+  margin: 15px;
+  width: calc((25%) - 30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 800px) {
+  .card__expander .bookmark {
+    width: calc((100% / 2) - 30px);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .card__expander .bookmark {
+    width: 100%;
+  }
+}
+
+.card__expander .bookmark__inner {
+  border-radius: 6px;
+  width: 100%;
+  height: 130px;
+  padding: 30px;
+  position: relative;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: #f7f7fe;
+  color: pink;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.card__expander .bookmark p {
+  font-size: 15px;
+}
+
+.card.is-collapsed .card__inner:after {
+  content: "";
+  opacity: 0;
+}
+
+.card.is-collapsed .card__expander {
+  max-height: 0;
+  min-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  opacity: 0;
+}
+
+.card.is-expanded .card__inner:after {
+  content: "";
+  opacity: 1;
+  display: block;
+  height: 0;
+  width: 0;
+  position: absolute;
+  bottom: -30px;
+  left: calc(50% - 15px);
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #333a45;
+}
+
+.card.is-expanded .card__inner .fa:before {
+  content: "\f115";
+}
+
+.card.is-expanded .card__inner__text {
+  background: #314b71;
+  color: #f7f7fe;
+}
+
+.card.is-expanded .card__inner .circle {
+  background-color: #314b71;
+}
+
+.card.is-expanded .card__inner svg {
+  color: #f7f7fe;
+}
+
+.card.is-expanded .card__expander {
+  max-height: 1000px;
+  min-height: 200px;
+  overflow: visible;
+  margin-top: 30px;
+  opacity: 1;
+}
+
+.card.is-expanded:hover .card__inner {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.card.is-inactive .card__inner {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.card.is-inactive:hover .card__inner {
+  background-color: #f7f7fe;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+@media screen and (min-width: 992px) {
+  .card:nth-of-type(3n + 2) .card__expander {
+    margin-left: calc(-100% - 30px);
+  }
+  .card:nth-of-type(3n + 3) .card__expander {
+    margin-left: calc(-200% - 60px);
+  }
+  .card:nth-of-type(3n + 4) {
+    clear: left;
+  }
+  .card__expander {
+    width: calc(300% + 60px);
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .card:nth-of-type(2n + 2) .card__expander {
+    margin-left: calc(-100% - 30px);
+  }
+  .card:nth-of-type(2n + 3) {
+    clear: left;
+  }
+  .card__expander {
+    width: calc(200% + 30px);
+  }
+}
+/*# sourceMappingURL=styles.css.map */
