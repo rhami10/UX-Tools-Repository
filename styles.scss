@@ -14,14 +14,39 @@ body {
     color: $slate;
 }
 
-.github-link {
+.extra-links {
     position: absolute;
     top: 10px;
     right: 15px;
+    display: flex;
 
-    a {
-        margin-left: 3px;
+    &_button {
+        background-color: darken(#f7f7fe, 1%);
+        box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
+        margin-right: 15px;
+        padding-left: 5px;
+        padding-right: 5px;
+        cursor: pointer;
+        display: flex;
         text-decoration: none;
+        align-items: center;
+        border-radius: 6px;
+        color: darken(#333a45, 5%);
+        font-size: small;
+
+        &:hover {
+            background-color: darken(#333a45, 5%);
+            color: white;
+        }
+
+        svg {
+            padding-left: 5px;
+        }
+
+        p {
+            margin-left: 8px;
+            padding-right: 5px;
+        }
     }
 }
 

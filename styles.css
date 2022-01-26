@@ -9,15 +9,47 @@ body {
   color: #333a45;
 }
 
-.github-link {
+.extra-links {
   position: absolute;
   top: 10px;
   right: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.github-link a {
-  margin-left: 3px;
+.extra-links_button {
+  background-color: #f2f2fd;
+  -webkit-box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
+  margin-right: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   text-decoration: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 6px;
+  color: #282e36;
+  font-size: small;
+}
+
+.extra-links_button:hover {
+  background-color: #282e36;
+  color: white;
+}
+
+.extra-links_button svg {
+  padding-left: 5px;
+}
+
+.extra-links_button p {
+  margin-left: 8px;
+  padding-right: 5px;
 }
 
 .wrapper {

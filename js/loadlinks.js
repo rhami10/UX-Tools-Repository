@@ -18,15 +18,17 @@ else { GenerateCards (storedPasskey) };
 function CheckCompositeURLHash (passkey) {
     if (passkey.length == (url.length - 1)) {
         
-        var compositeURL = url[0];
+        var fileId = "";
         var passKeyChars = passkey.split('');
 
         for(let i = 0; i < passkey.length; i++) {
-            compositeURL += passKeyChars[i];
-            compositeURL += url[i+1];
+            fileId += passKeyChars[i];
+            fileId += url[i+1];
         }
 
-        return CryptoJS.SHA3(compositeURL) == hashedURL ?  { success: true, url: compositeURL } : { success: false }
+        var compositeURL = url[0] + fileId;
+
+        return CryptoJS.SHA3(compositeURL) == hashedURL ?  { success: true, url: compositeURL, fileId: fileId } : { success: false }
     }
 
     return { success: false }
@@ -44,8 +46,6 @@ function GenerateCards (passKeyUserInput) {
 
         $('.wrapper').append('<div class="cards"></div>');
 
-        var compositeURL;
-
         import('/js/test/local_values.js')
         .then((data) => {
             
@@ -58,8 +58,15 @@ function GenerateCards (passKeyUserInput) {
             console.log("[LIVE] Using online JSON.");
             var compositeURL = new URL(checkHash.url);
             Object.keys(params).forEach(key => compositeURL.searchParams.append(key, params[key]));
+            
             LoadInCardsHTML(compositeURL);
             
+            $('.extra-links').append(
+                '<a class="extra-links_button" href="https://drive.google.com/file/d/' + checkHash.fileId + '" target="_blank">'
+                +'<i class="fas fa-pen"></i>'
+                +'<p>Edit JSON</p>'
+                +'</a>'
+            )
         });
         
         return true;
@@ -69,6 +76,7 @@ function GenerateCards (passKeyUserInput) {
 }
 
 function LoadInCardsHTML (jsonURL) {
+
     fetch(jsonURL)
         .then(response => {
             return response.json();
