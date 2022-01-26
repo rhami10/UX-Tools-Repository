@@ -9,6 +9,17 @@ body {
   color: #333a45;
 }
 
+.github-link {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.github-link a {
+  margin-left: 3px;
+  text-decoration: none;
+}
+
 .wrapper {
   margin: 5em auto;
   max-width: 1000px;
