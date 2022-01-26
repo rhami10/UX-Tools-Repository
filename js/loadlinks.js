@@ -1,7 +1,9 @@
 // OK, I can't believe you actually came snooping around.
-import { GetBookmarkText, GetBookmarkImageLink, HasParentClass } from './utilities.js';
+import { GetBookmarkText, GetBookmarkImageLink, HasClassIncludeParents, OpenAllLinks } from './utilities.js';
 import { url, params, hashedURL } from './globals.js';
 import { getCookie, setCookie } from './cookieStorage.js';
+
+import { urlLocal } from './test/local_values.js';
 
 var storedPasskey = getCookie('passkey');
 
@@ -39,14 +41,21 @@ function GenerateCards (passKeyUserInput) {
     if(checkHash.success) {
 
         // Setting Up Cookie
-        setCookie('passkey', passKeyUserInput, 31);
+        if (getCookie('passkey') == null) setCookie('passkey', passKeyUserInput, 31)
 
         $('.wrapper').append('<div class="cards"></div>');
 
-        var compositeURL = new URL(checkHash.url);
+        var compositeURL;
 
-        Object.keys(params).forEach(key => compositeURL.searchParams.append(key, params[key]))
-
+        try {
+            compositeURL = urlLocal;
+            console.log("[DEV] Using Local Test JSON");
+        } catch (error) {
+            // Fetching Live Version of Bookmarks
+            compositeURL = new URL(checkHash.url);
+            Object.keys(params).forEach(key => compositeURL.searchParams.append(key, params[key]))
+        }
+        
         fetch(compositeURL)
             .then(response => {
                 return response.json();
@@ -54,6 +63,7 @@ function GenerateCards (passKeyUserInput) {
             .then(data => {
 
                 data.subcategories.forEach(subcategory => {
+
                     $('.cards').append(
                         '<div class="card [ is-collapsed ]">'
                         + '<div class="card__inner [ js-expander ]">'
@@ -66,18 +76,23 @@ function GenerateCards (passKeyUserInput) {
                         + '</div>'
                         + '</div>'
                         + '<div id="expander-' + subcategory.name + '" class="card__expander">'
+                        + '<div class="button-container"><button id="button-all-'+ subcategory.name +'">Open All</button></div>'
                         + '</div>'
                         + '</div>'
-                    )
+                    );
+
+                    document.getElementById('button-all-' + subcategory.name).addEventListener("click", () => OpenAllLinks(data.bookmarks, subcategory.name));
                 });
 
                 data.bookmarks.forEach(bookmark => {
 
                     $('#expander-' + bookmark.subcategory).append(
                         '<div class="bookmark">'
+                        + '<a href="' + bookmark.link + '" target="_blank">'
                         + '<div class="bookmark__inner" style="background-image: url(' + GetBookmarkImageLink(bookmark) + ')">'
-                        + GetBookmarkText(bookmark)
+                        + '<div class="overlay"><p>' + GetBookmarkText(bookmark) + '</p></div>'
                         + '</div>'
+                        + '</a>'
                         + '</div>'
                     )
                 });
@@ -86,11 +101,7 @@ function GenerateCards (passKeyUserInput) {
 
                 // Appending outer click event to close expanded elements
                 $(document).on("click", "body", function (event) {
-
-                    if($(event.target).hasClass('js-expander') || HasParentClass(event.target, 'js-expander')) {
-                        console.log("expander element clicked");
-                    }
-                    else {
+                    if(!HasClassIncludeParents(event.target, 'is-expanded')) {
                         $('.is-expanded').removeClass('is-expanded').addClass('is-collapsed');
                         $cell.not($('is-expanded')).removeClass('is-inactive');
                     }
