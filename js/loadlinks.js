@@ -52,10 +52,13 @@ function GenerateCards (passKeyUserInput) {
             console.log("[DEV] Using Local Test JSON");
         } catch (error) {
             // Fetching Live Version of Bookmarks
+            console.log(error);
             compositeURL = new URL(checkHash.url);
             Object.keys(params).forEach(key => compositeURL.searchParams.append(key, params[key]))
         }
         
+        console.log(compositeURL);
+
         fetch(compositeURL)
             .then(response => {
                 return response.json();
