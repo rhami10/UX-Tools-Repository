@@ -20,11 +20,32 @@ export function HasClassIncludeParents (child, classname) {
 export function OpenAllLinks(bookmarks, subcategory) {
     if (window.confirm("Are you sure?")) {
         bookmarks.forEach(bookmark => {
-            if (bookmark.subcategory == subcategory) window.open(bookmark.link, "_blank")
+            if (bookmark.subcategory == subcategory) {
+
+                window.open(bookmark.link, "_blank");
+
+                if (bookmark.hasOwnProperty('alternates')) {
+
+                    bookmark.alternates.forEach(alternate => {
+                        window.open(alternate, "_blank");
+                    });
+                }
+            }
         });
     }
 }
 
 export function CleanString (str) {
     return str.replace(/\s+/g, '');
+}
+
+export function GetOnClickAlternates (bookmark) {
+
+    if (bookmark.hasOwnProperty('alternates')) {
+        var code = "";
+        bookmark.alternates.map(link => code += "window.open('" + link + "'); ");
+        return code;
+    }
+
+    return "";
 }

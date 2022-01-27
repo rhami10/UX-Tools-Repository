@@ -109,7 +109,7 @@ function LoadInCardsHTML (jsonURL) {
 
                 $('#expander-' + Utils.CleanString(bookmark.subcategory)).append(
                     '<div class="bookmark">'
-                    + '<a href="' + bookmark.link + '" target="_blank">'
+                    + '<a href="' + bookmark.link + '" onclick="' + Utils.GetOnClickAlternates(bookmark) + '" target="_blank">'
                     + '<div class="bookmark__inner" style="background-image: url(' + Utils.GetBookmarkImageLink(bookmark) + ')">'
                     + '<div class="overlay"><p>' + Utils.GetBookmarkText(bookmark) + '</p></div>'
                     + '</div>'
