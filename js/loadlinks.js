@@ -1,6 +1,6 @@
 // OK, I can't believe you actually came snooping around.
 
-import { GetBookmarkText, GetBookmarkImageLink, HasClassIncludeParents, OpenAllLinks } from './utilities.js';
+import * as Utils from './utilities.js';
 import { url, params, hashedURL } from './globals.js';
 import { getCookie, setCookie } from './cookieStorage.js';
 
@@ -96,22 +96,22 @@ function LoadInCardsHTML (jsonURL) {
                     + '<span>' + subcategory.name + '</span>'
                     + '</div>'
                     + '</div>'
-                    + '<div id="expander-' + subcategory.name + '" class="card__expander">'
-                    + '<div class="button-container"><button id="button-all-'+ subcategory.name +'">Open All</button></div>'
+                    + '<div id="expander-' + Utils.CleanString(subcategory.name) + '" class="card__expander">'
+                    + '<div class="button-container"><button id="button-all-'+ Utils.CleanString(subcategory.name) +'">Open All</button></div>'
                     + '</div>'
                     + '</div>'
                 );
 
-                document.getElementById('button-all-' + subcategory.name).addEventListener("click", () => OpenAllLinks(data.bookmarks, subcategory.name));
+                document.getElementById('button-all-' + Utils.CleanString(subcategory.name)).addEventListener("click", () => Utils.OpenAllLinks(data.bookmarks, Utils.CleanString(subcategory.name)));
             });
 
             data.bookmarks.forEach(bookmark => {
 
-                $('#expander-' + bookmark.subcategory).append(
+                $('#expander-' + Utils.CleanString(bookmark.subcategory)).append(
                     '<div class="bookmark">'
                     + '<a href="' + bookmark.link + '" target="_blank">'
-                    + '<div class="bookmark__inner" style="background-image: url(' + GetBookmarkImageLink(bookmark) + ')">'
-                    + '<div class="overlay"><p>' + GetBookmarkText(bookmark) + '</p></div>'
+                    + '<div class="bookmark__inner" style="background-image: url(' + Utils.GetBookmarkImageLink(bookmark) + ')">'
+                    + '<div class="overlay"><p>' + Utils.GetBookmarkText(bookmark) + '</p></div>'
                     + '</div>'
                     + '</a>'
                     + '</div>'
@@ -122,7 +122,7 @@ function LoadInCardsHTML (jsonURL) {
 
             // Appending outer click event to close expanded elements
             $(document).on("click", "body", function (event) {
-                if(!HasClassIncludeParents(event.target, 'is-expanded')) {
+                if(!Utils.HasClassIncludeParents(event.target, 'is-expanded')) {
                     $('.is-expanded').removeClass('is-expanded').addClass('is-collapsed');
                     $cell.not($('is-expanded')).removeClass('is-inactive');
                 }

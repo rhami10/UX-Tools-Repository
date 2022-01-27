@@ -24,3 +24,7 @@ export function OpenAllLinks(bookmarks, subcategory) {
         });
     }
 }
+
+export function CleanString (str) {
+    return str.replace(/\s+/g, '');
+}
