@@ -102,7 +102,7 @@ function LoadInCardsHTML (jsonURL) {
                     + '</div>'
                 );
 
-                document.getElementById('button-all-' + Utils.CleanString(subcategory.name)).addEventListener("click", () => Utils.OpenAllLinks(data.bookmarks, Utils.CleanString(subcategory.name)));
+                document.getElementById('button-all-' + Utils.CleanString(subcategory.name)).addEventListener("click", () => Utils.OpenAllLinks(data.bookmarks, subcategory.name));
             });
 
             data.bookmarks.forEach(bookmark => {
