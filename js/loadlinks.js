@@ -27,9 +27,6 @@ function CheckCompositeURLHash(passkey) {
 
 		var compositeURL = url[0] + fileId;
 
-		console.log(CryptoJS.SHA3(compositeURL) + "");
-		console.log(hashedURL);
-
 		return CryptoJS.SHA3(compositeURL) == hashedURL
 			? { success: true, url: compositeURL, fileId: fileId }
 			: { success: false };
